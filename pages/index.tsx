@@ -15,7 +15,7 @@ import {
 import type { NextPage } from "next";
 import { useEffect, useMemo, useState } from "react";
 import Head from "next/head";
-import useWindowSize from "./useWindowSize";
+import useWindowSize from "../hooks/useWindowSize";
 import { ThemeProvider } from "@mui/system";
 import {LightMode as SunIcon, DarkMode as MoonIcon} from "@mui/icons-material";
 
@@ -97,7 +97,7 @@ const Home: NextPage = () => {
                 </TableCell>
                 <TableCell style={{ fontWeight: "bold" }}>{data?.requirementTitle}</TableCell>
                 {new Array(10).fill(0).map((_, index) => (
-                  <TableCell></TableCell>
+                  <TableCell key={index}></TableCell>
                 ))}
               </TableRow>
             </TableHead>
@@ -106,7 +106,7 @@ const Home: NextPage = () => {
                 .slice()
                 .sort((a, b) => b.amount - a.amount)
                 .map(clan => (
-                  <TableRow>
+                  <TableRow key={clan.details.clan_id}>
                     <TableCell style={{ fontWeight: "bold" }}>
                       <div
                         style={{
@@ -127,7 +127,7 @@ const Home: NextPage = () => {
                     </TableCell>
                     <TableCell style={{ fontWeight: "bold" }}>{clan.amount}</TableCell>
                     {clan.users.map(user => (
-                      <Tooltip
+                      <Tooltip key={user.user_id}
                         title={`${user.username}: ${clan.data[user.user_id] ?? "0"} ${
                           data?.requirementSuffix
                         }`}>
@@ -152,7 +152,7 @@ const Home: NextPage = () => {
                       </Tooltip>
                     ))}
                     {new Array(10 - clan.users.length).fill(0).map((_, index) => (
-                      <TableCell />
+                      <TableCell key={index} />
                     ))}
                   </TableRow>
                 ))}
