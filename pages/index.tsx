@@ -122,7 +122,7 @@ const Home: NextPage = () => {
                             clan.details.clan_id
                           ).toString(36)}.png`}
                         />
-                        {clan.details.name}
+                        <a href={`https://cuppazee.app/clan/${clan.details.clan_id}`}>{clan.details.name}</a>
                       </div>
                     </TableCell>
                     <TableCell style={{ fontWeight: "bold" }}>{clan.amount}</TableCell>
@@ -155,7 +155,9 @@ const Home: NextPage = () => {
                       <TableCell key={index} />
                     ))}
                   </TableRow>
-                ))}
+                )) ?? <TableRow>
+                  <TableCell>Loading... This may take a moment.</TableCell>
+                </TableRow>}
             </TableBody>
           </Table>
         </TableContainer>
